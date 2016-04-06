@@ -13,6 +13,7 @@ var userSchema = new mongoose.Schema({
     }
 });
 
+/*
 userSchema.pre('save', function(callback) {
     var user = this;
     
@@ -30,6 +31,8 @@ userSchema.pre('save', function(callback) {
     });
 });
 
+*/
+
 userSchema.methods.verifyUser = function(password, callback) {
     bcrypt.compare(password, this.password, function(err, isMatch) {
         if (err) return callback(err);
@@ -37,5 +40,6 @@ userSchema.methods.verifyUser = function(password, callback) {
         callback(null, isMatch);
     });
 };
+
 
 module.exports = mongoose.model('User', userSchema);

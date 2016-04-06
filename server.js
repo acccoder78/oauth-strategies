@@ -39,37 +39,37 @@ router.get('/', function(req, res) {
     res.json({message: "you are running low on beer!"});
 });
 
-router.route('/beers')
+router.route('/api/beers')
     .post(authController.isAuthenticated, beerController.addBeer)
     .get(authController.isAuthenticated, beerController.getBeers);
 
 //router.route('/beers/:beer_name')
   //  .get(authController.isAuthenticated, beerController.getBeerByName);
 
-router.route('/beers/:beer_id')
+router.route('/api/beers/:beer_id')
     .get(authController.isAuthenticated, beerController.getBeerById)
     .put(authController.isAuthenticated, beerController.putBeer)
     .delete(authController.isAuthenticated, beerController.deleteBeer);
     
-router.route('/beers/all')
+router.route('/api/beers/all')
     .delete(authController.isAuthenticated, beerController.deleteAll);
 
-router.route('/users')
+router.route('/api/users')
     .post(userController.addUsers)
     .get(authController.isAuthenticated, userController.getUsers)
     .delete(authController.isAuthenticated, userController.removeUser);
     
-router.route('/clients')
+router.route('/api/clients')
     .post(authController.isAuthenticated, clientController.addClient)
     .get(authController.isAuthenticated, clientController.getClients);
     
-router.route('/oauth2/authorize')
+router.route('/api/oauth2/authorize')
     .get(authController.isAuthenticated, oauth2Controller.authorization)
     .post(authController.isAuthenticated, oauth2Controller.decision);
     
-router.route('/oauth2/token')
+router.route('/api/oauth2/token')
     .post(authController.isClientAuthenticated, oauth2Controller.token);
 
-app.use('/api', router);
+app.use(router);
 
 app.listen(port);
